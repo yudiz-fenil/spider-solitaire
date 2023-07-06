@@ -1,0 +1,401 @@
+{
+    "id": "01aefa93-6044-4159-8358-7e91310aa05f",
+    "sceneType": "SCENE",
+    "settings": {
+        "preloadPackFiles": [],
+        "createMethodName": "editorCreate",
+        "sceneKey": "Level",
+        "borderWidth": 1920,
+        "borderHeight": 1080
+    },
+    "displayList": [
+        {
+            "type": "Container",
+            "id": "9deb2f3b-ac68-4786-bfb6-cdc26118c8cd",
+            "label": "container_win_cards",
+            "scope": "CLASS",
+            "components": [],
+            "list": []
+        },
+        {
+            "type": "Container",
+            "id": "44470c4c-3d9e-45b9-a39c-6d576bbe92fc",
+            "label": "container_bg",
+            "components": [],
+            "y": 1,
+            "list": [
+                {
+                    "type": "Image",
+                    "id": "402b83d5-8d76-4882-bff7-2bb8680cd8d4",
+                    "label": "collect_cards",
+                    "scope": "CLASS",
+                    "components": [],
+                    "texture": {
+                        "key": "back_red_0"
+                    },
+                    "x": 107,
+                    "y": 153,
+                    "scaleX": 0.45,
+                    "scaleY": 0.45
+                }
+            ]
+        },
+        {
+            "type": "Container",
+            "id": "1287da72-c652-4733-9201-01933bb52adf",
+            "label": "container_base_cards",
+            "scope": "CLASS",
+            "components": [],
+            "y": -2,
+            "list": [
+                {
+                    "prefabId": "f2840477-2d74-4d49-bf0a-0787a8a03c96",
+                    "id": "0853c786-7feb-4f44-9c10-0c01b08f4bdd",
+                    "unlock": [
+                        "x",
+                        "y"
+                    ],
+                    "label": "baseCard_7",
+                    "components": [],
+                    "x": 1817,
+                    "y": 156,
+                    "nestedPrefabs": []
+                },
+                {
+                    "prefabId": "f2840477-2d74-4d49-bf0a-0787a8a03c96",
+                    "id": "6fd4bcc5-2371-4dd9-9999-0fde164c8800",
+                    "unlock": [
+                        "x",
+                        "y"
+                    ],
+                    "label": "baseCard_6",
+                    "components": [],
+                    "x": 1627,
+                    "y": 154,
+                    "nestedPrefabs": []
+                },
+                {
+                    "prefabId": "f2840477-2d74-4d49-bf0a-0787a8a03c96",
+                    "id": "5b051148-49d0-4572-9890-94b9f0271873",
+                    "unlock": [
+                        "x",
+                        "y"
+                    ],
+                    "label": "baseCard_5",
+                    "components": [],
+                    "x": 1437,
+                    "y": 155,
+                    "nestedPrefabs": []
+                },
+                {
+                    "prefabId": "f2840477-2d74-4d49-bf0a-0787a8a03c96",
+                    "id": "39268084-beef-405d-9056-d359397eef54",
+                    "unlock": [
+                        "x",
+                        "y"
+                    ],
+                    "label": "baseCard_4",
+                    "components": [],
+                    "x": 1247,
+                    "y": 153,
+                    "nestedPrefabs": []
+                },
+                {
+                    "prefabId": "f2840477-2d74-4d49-bf0a-0787a8a03c96",
+                    "id": "e894b5f5-e19d-417c-bc9b-1338d627b226",
+                    "unlock": [
+                        "x",
+                        "y"
+                    ],
+                    "label": "baseCard_3",
+                    "components": [],
+                    "x": 1057,
+                    "y": 153,
+                    "nestedPrefabs": []
+                },
+                {
+                    "prefabId": "f2840477-2d74-4d49-bf0a-0787a8a03c96",
+                    "id": "fac4518b-c885-4b68-820c-408eabbc90d1",
+                    "unlock": [
+                        "x",
+                        "y"
+                    ],
+                    "label": "baseCard_2",
+                    "components": [],
+                    "x": 867,
+                    "y": 151,
+                    "nestedPrefabs": []
+                },
+                {
+                    "prefabId": "f2840477-2d74-4d49-bf0a-0787a8a03c96",
+                    "id": "0d512ad6-f0fd-4fda-b292-2619b9f83483",
+                    "unlock": [
+                        "x",
+                        "y"
+                    ],
+                    "label": "baseCard_1",
+                    "components": [],
+                    "x": 677,
+                    "y": 153,
+                    "nestedPrefabs": []
+                },
+                {
+                    "prefabId": "f2840477-2d74-4d49-bf0a-0787a8a03c96",
+                    "id": "a7ee229b-ea36-42fe-8bd8-c3440c2198cc",
+                    "unlock": [
+                        "x",
+                        "y"
+                    ],
+                    "label": "baseCard_0",
+                    "components": [],
+                    "x": 487,
+                    "y": 152,
+                    "nestedPrefabs": []
+                }
+            ]
+        },
+        {
+            "type": "Container",
+            "id": "b06f3d73-ee55-4528-89ce-fad7f6d988ee",
+            "label": "container_bg_cards",
+            "components": [],
+            "y": 1,
+            "list": [
+                {
+                    "type": "Image",
+                    "id": "7e9d7a73-7f4b-4472-8061-b29c10032f67",
+                    "label": "card_base_0",
+                    "components": [],
+                    "texture": {
+                        "key": "card_base-2"
+                    },
+                    "x": 107,
+                    "y": 414,
+                    "scaleX": 0.45,
+                    "scaleY": 0.45
+                },
+                {
+                    "type": "Image",
+                    "id": "6c79c640-bccb-4b94-8608-8f618194ee7b",
+                    "label": "card_base_1",
+                    "components": [],
+                    "texture": {
+                        "key": "card_base-2"
+                    },
+                    "x": 297,
+                    "y": 414,
+                    "scaleX": 0.45,
+                    "scaleY": 0.45
+                },
+                {
+                    "type": "Image",
+                    "id": "39dd1708-5801-4770-adc8-76e413ec3ab1",
+                    "label": "card_base_2",
+                    "components": [],
+                    "texture": {
+                        "key": "card_base-2"
+                    },
+                    "x": 491,
+                    "y": 414,
+                    "scaleX": 0.45,
+                    "scaleY": 0.45
+                },
+                {
+                    "type": "Image",
+                    "id": "95d8a68c-ddcf-403f-b032-61718aff1fc7",
+                    "label": "card_base_3",
+                    "components": [],
+                    "texture": {
+                        "key": "card_base-2"
+                    },
+                    "x": 677,
+                    "y": 414,
+                    "scaleX": 0.45,
+                    "scaleY": 0.45
+                },
+                {
+                    "type": "Image",
+                    "id": "256ec6f5-52d8-4b90-b461-7a8ddf492726",
+                    "label": "card_base_4",
+                    "components": [],
+                    "texture": {
+                        "key": "card_base-2"
+                    },
+                    "x": 867,
+                    "y": 414,
+                    "scaleX": 0.45,
+                    "scaleY": 0.45
+                },
+                {
+                    "type": "Image",
+                    "id": "4212a228-1b45-42ab-bc92-e7db8fbfbace",
+                    "label": "card_base_5",
+                    "components": [],
+                    "texture": {
+                        "key": "card_base-2"
+                    },
+                    "x": 1057,
+                    "y": 414,
+                    "scaleX": 0.45,
+                    "scaleY": 0.45
+                },
+                {
+                    "type": "Image",
+                    "id": "7a439b60-3803-41ea-9def-1f866773b5a2",
+                    "label": "card_base_6",
+                    "components": [],
+                    "texture": {
+                        "key": "card_base-2"
+                    },
+                    "x": 1247,
+                    "y": 414,
+                    "scaleX": 0.45,
+                    "scaleY": 0.45
+                },
+                {
+                    "type": "Image",
+                    "id": "7b8271a4-84e3-472e-9e5b-66e89dc8dc73",
+                    "label": "card_base_7",
+                    "components": [],
+                    "texture": {
+                        "key": "card_base-2"
+                    },
+                    "x": 1437,
+                    "y": 414,
+                    "scaleX": 0.45,
+                    "scaleY": 0.45
+                },
+                {
+                    "type": "Image",
+                    "id": "bf04b8a6-05c6-4227-a84f-9b15aa0a3d45",
+                    "label": "card_base_8",
+                    "components": [],
+                    "texture": {
+                        "key": "card_base-2"
+                    },
+                    "x": 1627,
+                    "y": 414,
+                    "scaleX": 0.45,
+                    "scaleY": 0.45
+                },
+                {
+                    "type": "Image",
+                    "id": "8675261d-2dc3-49b7-9da4-14cbddbb2d8c",
+                    "label": "card_base_9",
+                    "components": [],
+                    "texture": {
+                        "key": "card_base-2"
+                    },
+                    "x": 1817,
+                    "y": 414,
+                    "scaleX": 0.45,
+                    "scaleY": 0.45
+                }
+            ]
+        },
+        {
+            "type": "Container",
+            "id": "a2c7a3dc-195a-461c-a555-ddb4075d02b1",
+            "label": "container_cards_main",
+            "scope": "CLASS",
+            "components": [],
+            "list": [
+                {
+                    "type": "Container",
+                    "id": "7cee0cbb-38cc-449c-a46e-e2b976659e59",
+                    "label": "container_cards_0",
+                    "useGameObjectName": true,
+                    "components": [],
+                    "list": []
+                },
+                {
+                    "type": "Container",
+                    "id": "0a7a070b-7d3b-4697-b92b-08d9ad0b299d",
+                    "label": "container_cards_1",
+                    "useGameObjectName": true,
+                    "components": [],
+                    "list": []
+                },
+                {
+                    "type": "Container",
+                    "id": "8a551a76-139d-42d3-b035-adb1f106cb3e",
+                    "label": "container_cards_2",
+                    "useGameObjectName": true,
+                    "components": [],
+                    "list": []
+                },
+                {
+                    "type": "Container",
+                    "id": "8183ee78-70b2-4075-a883-9354fd1ed2ae",
+                    "label": "container_cards_3",
+                    "useGameObjectName": true,
+                    "components": [],
+                    "list": []
+                },
+                {
+                    "type": "Container",
+                    "id": "ab3f55b3-ac06-4516-9894-455cbad4a083",
+                    "label": "container_cards_4",
+                    "useGameObjectName": true,
+                    "components": [],
+                    "list": []
+                },
+                {
+                    "type": "Container",
+                    "id": "adeaa4e4-b024-4889-8528-b36cec94cd9b",
+                    "label": "container_cards_5",
+                    "useGameObjectName": true,
+                    "components": [],
+                    "list": []
+                },
+                {
+                    "type": "Container",
+                    "id": "2e75c69b-8296-4508-bde3-0ae6a9a59b87",
+                    "label": "container_cards_6",
+                    "useGameObjectName": true,
+                    "components": [],
+                    "list": []
+                },
+                {
+                    "type": "Container",
+                    "id": "19675ae8-ae75-44bc-a594-168e5e33adef",
+                    "label": "container_cards_7",
+                    "useGameObjectName": true,
+                    "components": [],
+                    "list": []
+                },
+                {
+                    "type": "Container",
+                    "id": "f405be48-866d-4102-bec2-2633ec096539",
+                    "label": "container_cards_8",
+                    "useGameObjectName": true,
+                    "components": [],
+                    "list": []
+                },
+                {
+                    "type": "Container",
+                    "id": "3dd791ee-c189-46e4-b5d3-fcc52c1657d6",
+                    "label": "container_cards_9",
+                    "useGameObjectName": true,
+                    "components": [],
+                    "list": []
+                }
+            ]
+        },
+        {
+            "type": "Container",
+            "id": "fb04e991-f94a-4798-a908-3e34c5198d6a",
+            "label": "container_top",
+            "scope": "CLASS",
+            "components": [],
+            "list": []
+        }
+    ],
+    "plainObjects": [],
+    "meta": {
+        "app": "Phaser Editor 2D - Scene Editor",
+        "url": "https://phasereditor2d.com",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 3
+    }
+}
