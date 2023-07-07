@@ -369,7 +369,6 @@ class Level extends Phaser.Scene {
 		this.dragGroup = this.add.group();
 
 		this.input.on('dragstart', (pointer, gameObject, dragX, dragY) => {
-			console.log("Drag Start")
 			this.lastContainer = gameObject.parentContainer
 			const cardIndex = gameObject.parentContainer.list.indexOf(gameObject);
 			const containerLength = gameObject.parentContainer.list.length;
