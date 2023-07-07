@@ -11,19 +11,24 @@
     "displayList": [
         {
             "type": "Container",
-            "id": "9deb2f3b-ac68-4786-bfb6-cdc26118c8cd",
-            "label": "container_win_cards",
-            "scope": "CLASS",
-            "components": [],
-            "list": []
-        },
-        {
-            "type": "Container",
             "id": "44470c4c-3d9e-45b9-a39c-6d576bbe92fc",
             "label": "container_bg",
             "components": [],
             "y": 1,
             "list": [
+                {
+                    "type": "Image",
+                    "id": "7f6542fd-be67-4764-bb92-f5250ea1a91f",
+                    "label": "card_base",
+                    "components": [],
+                    "texture": {
+                        "key": "card_base-2"
+                    },
+                    "x": 107,
+                    "y": 153,
+                    "scaleX": 0.45,
+                    "scaleY": 0.45
+                },
                 {
                     "type": "Image",
                     "id": "402b83d5-8d76-4882-bff7-2bb8680cd8d4",
@@ -37,6 +42,92 @@
                     "y": 153,
                     "scaleX": 0.45,
                     "scaleY": 0.45
+                },
+                {
+                    "type": "Text",
+                    "id": "eee50f5d-ad7d-4953-b96b-723ff2f5c52a",
+                    "label": "text_1",
+                    "components": [],
+                    "x": 293,
+                    "y": 103,
+                    "originX": 0.5,
+                    "text": "Spider Solitaire",
+                    "fontFamily": "Verdana",
+                    "fontSize": "20px",
+                    "fontStyle": "bold",
+                    "stroke": "#000",
+                    "strokeThickness": 5,
+                    "shadow.stroke": true,
+                    "shadow.fill": true
+                },
+                {
+                    "type": "Text",
+                    "id": "cfb2075f-9225-414e-b23f-9723bc71d5a5",
+                    "label": "text",
+                    "components": [],
+                    "x": 293,
+                    "y": 143,
+                    "originX": 0.5,
+                    "text": "One Suit",
+                    "fontFamily": "Verdana",
+                    "fontSize": "20px",
+                    "fontStyle": "bold",
+                    "stroke": "#000",
+                    "strokeThickness": 2
+                },
+                {
+                    "type": "Image",
+                    "id": "f653fc8c-5425-4455-b3ad-6c9825f4a2ff",
+                    "label": "btn_play_again",
+                    "scope": "CLASS",
+                    "components": [],
+                    "texture": {
+                        "key": "button"
+                    },
+                    "x": 293,
+                    "y": 235,
+                    "scaleX": 0.5,
+                    "scaleY": 0.5
+                },
+                {
+                    "type": "Text",
+                    "id": "f661395c-9a67-4c00-9ba5-3c694543d53f",
+                    "label": "text_2",
+                    "components": [],
+                    "x": 293,
+                    "y": 228,
+                    "originX": 0.5,
+                    "text": "Play Again",
+                    "fontFamily": "Verdana"
+                },
+                {
+                    "type": "Image",
+                    "id": "fac056c2-a865-47ed-a477-74b59eeed15a",
+                    "label": "logo",
+                    "components": [],
+                    "texture": {
+                        "key": "logo"
+                    },
+                    "x": 293,
+                    "y": 57,
+                    "scaleX": 0.5,
+                    "scaleY": 0.5
+                },
+                {
+                    "type": "Text",
+                    "id": "bff6cd89-5d71-42bd-adbd-153674c281e8",
+                    "label": "txt_time",
+                    "scope": "CLASS",
+                    "components": [],
+                    "x": 293,
+                    "y": 178,
+                    "originX": 0.5,
+                    "text": "00:00",
+                    "fontFamily": "Verdana",
+                    "fontSize": "20px",
+                    "fontStyle": "bold",
+                    "stroke": "#000",
+                    "strokeThickness": 2
                 }
             ]
         },
@@ -195,7 +286,7 @@
                     "texture": {
                         "key": "card_base-2"
                     },
-                    "x": 491,
+                    "x": 487,
                     "y": 414,
                     "scaleX": 0.45,
                     "scaleY": 0.45
@@ -389,6 +480,43 @@
             "scope": "CLASS",
             "components": [],
             "list": []
+        },
+        {
+            "type": "Container",
+            "id": "79483da3-bca8-463b-a3d7-5c3882891707",
+            "label": "container_toast",
+            "scope": "CLASS",
+            "components": [],
+            "x": 10,
+            "y": 1000,
+            "visible": false,
+            "list": [
+                {
+                    "type": "Rectangle",
+                    "id": "9a1bd18b-27f7-40ce-acd5-3f14ffb54b73",
+                    "label": "bg_toast",
+                    "scope": "CLASS",
+                    "components": [],
+                    "originX": 0,
+                    "originY": 0,
+                    "isFilled": true,
+                    "fillAlpha": 0.2,
+                    "width": 500,
+                    "height": 50
+                },
+                {
+                    "type": "Text",
+                    "id": "66e175e3-119e-4a18-af71-b2d51834139a",
+                    "label": "txt_toast",
+                    "scope": "CLASS",
+                    "components": [],
+                    "x": 10,
+                    "y": 25,
+                    "originY": 0.5,
+                    "text": "New text",
+                    "fontFamily": "Verdana"
+                }
+            ]
         }
     ],
     "plainObjects": [],

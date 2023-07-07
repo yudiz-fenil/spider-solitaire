@@ -18,15 +18,62 @@ class Level extends Phaser.Scene {
 
 		// container_win_cards
 		const container_win_cards = this.add.container(0, 0);
+		container_win_cards.visible = false;
 
 		// container_bg
 		const container_bg = this.add.container(0, 1);
+
+		// card_base
+		const card_base = this.add.image(107, 153, "card_base-2");
+		card_base.scaleX = 0.45;
+		card_base.scaleY = 0.45;
+		container_bg.add(card_base);
 
 		// collect_cards
 		const collect_cards = this.add.image(107, 153, "back_red_0");
 		collect_cards.scaleX = 0.45;
 		collect_cards.scaleY = 0.45;
 		container_bg.add(collect_cards);
+
+		// text_1
+		const text_1 = this.add.text(293, 103, "", {});
+		text_1.setOrigin(0.5, 0);
+		text_1.text = "Spider Solitaire";
+		text_1.setStyle({ "fontFamily": "Verdana", "fontSize": "20px", "fontStyle": "bold", "stroke": "#000", "strokeThickness": 5, "shadow.stroke": true, "shadow.fill": true });
+		container_bg.add(text_1);
+
+		// text
+		const text = this.add.text(293, 143, "", {});
+		text.setOrigin(0.5, 0);
+		text.text = "One Suit";
+		text.setStyle({ "fontFamily": "Verdana", "fontSize": "20px", "fontStyle": "bold", "stroke": "#000", "strokeThickness": 2 });
+		container_bg.add(text);
+
+		// btn_play_again
+		const btn_play_again = this.add.image(293, 235, "button");
+		btn_play_again.scaleX = 0.5;
+		btn_play_again.scaleY = 0.5;
+		container_bg.add(btn_play_again);
+
+		// text_2
+		const text_2 = this.add.text(293, 228, "", {});
+		text_2.setOrigin(0.5, 0);
+		text_2.text = "Play Again";
+		text_2.setStyle({ "fontFamily": "Verdana" });
+		container_bg.add(text_2);
+
+		// logo
+		const logo = this.add.image(293, 57, "logo");
+		logo.scaleX = 0.5;
+		logo.scaleY = 0.5;
+		container_bg.add(logo);
+
+		// txt_time
+		const txt_time = this.add.text(293, 178, "", {});
+		txt_time.setOrigin(0.5, 0);
+		txt_time.text = "00:00";
+		txt_time.setStyle({ "fontFamily": "Verdana", "fontSize": "20px", "fontStyle": "bold", "stroke": "#000", "strokeThickness": 2 });
+		container_bg.add(txt_time);
 
 		// container_base_cards
 		const container_base_cards = this.add.container(0, -2);
@@ -79,7 +126,7 @@ class Level extends Phaser.Scene {
 		container_bg_cards.add(card_base_1);
 
 		// card_base_2
-		const card_base_2 = this.add.image(491, 414, "card_base-2");
+		const card_base_2 = this.add.image(487, 414, "card_base-2");
 		card_base_2.scaleX = 0.45;
 		card_base_2.scaleY = 0.45;
 		container_bg_cards.add(card_base_2);
@@ -182,11 +229,34 @@ class Level extends Phaser.Scene {
 		// container_top
 		const container_top = this.add.container(0, 0);
 
+		// container_toast
+		const container_toast = this.add.container(10, 1000);
+		container_toast.visible = false;
+
+		// bg_toast
+		const bg_toast = this.add.rectangle(0, 0, 500, 50);
+		bg_toast.setOrigin(0, 0);
+		bg_toast.isFilled = true;
+		bg_toast.fillAlpha = 0.2;
+		container_toast.add(bg_toast);
+
+		// txt_toast
+		const txt_toast = this.add.text(10, 25, "", {});
+		txt_toast.setOrigin(0, 0.5);
+		txt_toast.text = "New text";
+		txt_toast.setStyle({ "fontFamily": "Verdana" });
+		container_toast.add(txt_toast);
+
 		this.container_win_cards = container_win_cards;
 		this.collect_cards = collect_cards;
+		this.btn_play_again = btn_play_again;
+		this.txt_time = txt_time;
 		this.container_base_cards = container_base_cards;
 		this.container_cards_main = container_cards_main;
 		this.container_top = container_top;
+		this.container_toast = container_toast;
+		this.bg_toast = bg_toast;
+		this.txt_toast = txt_toast;
 
 		this.events.emit("scene-awake");
 	}
@@ -195,37 +265,59 @@ class Level extends Phaser.Scene {
 	container_win_cards;
 	/** @type {Phaser.GameObjects.Image} */
 	collect_cards;
+	/** @type {Phaser.GameObjects.Image} */
+	btn_play_again;
+	/** @type {Phaser.GameObjects.Text} */
+	txt_time;
 	/** @type {Phaser.GameObjects.Container} */
 	container_base_cards;
 	/** @type {Phaser.GameObjects.Container} */
 	container_cards_main;
 	/** @type {Phaser.GameObjects.Container} */
 	container_top;
+	/** @type {Phaser.GameObjects.Container} */
+	container_toast;
+	/** @type {Phaser.GameObjects.Rectangle} */
+	bg_toast;
+	/** @type {Phaser.GameObjects.Text} */
+	txt_toast;
 
 	/* START-USER-CODE */
 
 	// Write more your code here
+	showToast = (msg) => {
+		this.txt_toast.setText(msg);
+		this.bg_toast.width = this.txt_toast.width + 20;
+		this.container_toast.setVisible(true);
+		setTimeout(() => {
+			this.container_toast.setVisible(false);
+		}, 2000);
+	}
 	addDefaultCards = () => {
-		const card = new Card(this, 100, 100).setCard("back_red");
-		for (let i = 0; i < this.container_cards_main.list.length; i++) {
-			const cardContainer = this.container_cards_main.list
-			for (let j = 0; j < 5; j++) {
-				const cardName = (() => {
-					return j == 4 ? "spade_" + this.oGameManager.getRandomCard(this.aTotalCards) : "back_red_0";
-				})()
-				const cardBody = (() => {
-					return j == 4 ? "openCard" : "closeCard";
-				})()
-				const card = new Card(this, 107 + (190 * i), 415 + (50 * j));
-				card.setDepth(0);
+		const cardContainer = this.container_cards_main.list
+		for (let i = 0; i < cardContainer.length; i++) {
+			let cards = 5;
+			if (i > 3) cards = 4
+			for (let j = 0; j < cards; j++) {
+				const card = new Card(this, 107 + (190 * i), 415 + (45 * j));
+				card.setCard("back_red_0");
+				card.setName("back_red_0");
+				cardContainer[i].add(card);
+				this.aArray.push(card)
+			}
+		}
+		for (let i = 0; i < cardContainer.length; i++) {
+			let card = 5;
+			if (i > 3) card = 4
+			for (let j = card; j < card + 1; j++) {
+				const cardName = "spade_" + this.oGameManager.getRandomCard(this.aTotalCards);
+				const card = new Card(this, 107 + (190 * i), 415 + (45 * j));
 				card.setCard(cardName);
 				card.setName(cardName);
-				card.body = cardBody;
-				if (cardName != "back_red_0") {
-					card.setSize(180, 260);
-					card.setInteractive({ draggable: true });
-				}
+				card.setSize(180, 260);
+				card.setInteractive({ draggable: true });
 				cardContainer[i].add(card);
+				this.aArray.push(card)
 			}
 		}
 	}
@@ -256,7 +348,20 @@ class Level extends Phaser.Scene {
 		this.oGameManager = new GameManager(this);
 		this.aTotalCards = this.oGameManager.aTotalCards;
 		this.editorCreate();
+		this.aArray = []
+		this.nGameTime = 0;
+		this.nGameInteraval = setInterval(() => {
+			this.nGameTime++;
+			const minutes = Math.floor(this.nGameTime / 60);
+			const seconds = this.nGameTime % 60;
+			this.txt_time.setText(`${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`);
+		}, 1000);
+		this.oToasts = {
+			emptypiles: "Cannot dealt from stock: All piles need at least one card for stock to be delt.",
+			drop: "Cannot drop: Your card need to be one rank down.",
+		}
 		this.addDefaultCards();
+		this.nCollectCounter = 0;
 		this.nTotalSequence = -1;
 		this.lastContainer = null;
 		this.isCardDragging = false;
@@ -264,6 +369,7 @@ class Level extends Phaser.Scene {
 		this.dragGroup = this.add.group();
 
 		this.input.on('dragstart', (pointer, gameObject, dragX, dragY) => {
+			console.log("Drag Start")
 			this.lastContainer = gameObject.parentContainer
 			const cardIndex = gameObject.parentContainer.list.indexOf(gameObject);
 			const containerLength = gameObject.parentContainer.list.length;
@@ -288,7 +394,7 @@ class Level extends Phaser.Scene {
 		});
 		this.input.on('drag', (pointer, gameObject, dragX, dragY) => {
 			if (this.isCardDraggable) {
-				gameObject.parentContainer.list.forEach((card, i) => this.moveCard(card, dragX, dragY + (i * 50)))
+				gameObject.parentContainer.list.forEach((card, i) => this.moveCard(card, dragX, dragY + (i * 45)))
 			}
 		});
 		this.input.on('dragend', (pointer, gameObject) => {
@@ -296,11 +402,20 @@ class Level extends Phaser.Scene {
 				this.isCardDragging = false;
 				this.isCardDraggable = false;
 				this.checkContainer(pointer.x);
+			} else {
+				gameObject.parentContainer.each((card) => this.lastContainer.add(card));
 			}
 		});
 		this.collect_cards.setInteractive().on('pointerdown', () => {
-			this.collectCards();
+			if (this.collectCards()) {
+				this.nCollectCounter++
+				if (this.nCollectCounter == 5) this.collect_cards.setVisible(false);
+			}
 		})
+		this.btn_play_again.setInteractive().on('pointerdown', () => {
+			clearInterval(this.nGameInteraval);
+			this.scene.restart();
+		});
 	}
 	moveCard(gameObject, x, y) {
 		this.isCardDragging = true;
@@ -340,7 +455,7 @@ class Level extends Phaser.Scene {
 				this.checkLastCard(this.container_cards_main.list[9], 9);
 				break;
 			default:
-				console.log("x is out of range");
+				this.checkLastCard(this.container_cards_main.list[0], 0);
 				break;
 		}
 	}
@@ -354,6 +469,7 @@ class Level extends Phaser.Scene {
 				this.openLastCard(this.lastContainer);
 			} else {
 				this.container_top.each(card => this.lastContainer.add(card))
+				this.showToast(this.oToasts.drop);
 				this.arrangeCards(this.lastContainer, parseInt(this.lastContainer.name.match(/\d+/)[0]));
 			}
 		} else {
@@ -363,8 +479,9 @@ class Level extends Phaser.Scene {
 		}
 	}
 	arrangeCards = (container, index) => {
-		let gap = 50;
+		let gap = 45;
 		if (container.list.length > 14) gap = 40;
+		if (container.list.length >= 18) gap = 35;
 		container.list.forEach((card, i) => {
 			card.x = 107 + (190 * index);
 			card.y = 415 + (gap * i);
@@ -374,7 +491,7 @@ class Level extends Phaser.Scene {
 			const aSequence = []
 			for (let i = aCards.length - 1; i > aCards.length - 14; i--) {
 				const card = aCards[i];
-				if (card.body == "openCard") {
+				if (card.name.includes("spade")) {
 					aSequence.push(parseInt(card.name.match(/\d+/)[0]));
 				}
 			}
@@ -382,20 +499,13 @@ class Level extends Phaser.Scene {
 				if (this.isWinSequence(aSequence)) {
 					this.nTotalSequence++;
 					this.container_base_cards.list[this.nTotalSequence].setWinCard();
-					for (let i = aCards.length - 1; i > aCards.length - 14; i--) {
-						const card = aCards[i];
-						if (card.body == "openCard") {
-							aSequence.push(parseInt(card.name.match(/\d+/)[0]));
-						}
+					const length = container.list.length;
+					for (let i = length - 1; i >= length - 13; i--) {
+						container.list[i].destroy();
+						// this.container_win_cards.add(container.list[i]);
 					}
-					// for (let i = aCards.length - 1; i > aCards.length - 14; i--) {
-					// 	const card = aCards[i];
-					// 	if (card.body == "openCard") {
-					// 		this.container_win_cards.add(card);
-					// 		card.setPosition(0, 0);
-					// 	}
-					// }
-					// this.openLastCard(container);
+					this.openLastCard(container);
+					if (this.nTotalSequence == 7) this.fireWorks();
 				}
 			}
 		}
@@ -408,15 +518,21 @@ class Level extends Phaser.Scene {
 				const card = container.list[container.list.length - 1];
 				card.setCard("spade_" + cardName);
 				card.setName("spade_" + cardName);
-				card.body = "openCard";
 				card.setSize(180, 260);
 				card.setInteractive({ draggable: true });
 			}
 		}
 	}
 	collectCards = () => {
-		let gap = 50;
+		let gap = 45;
 		const cardContainerList = this.container_cards_main.list
+		for (let i = 0; i < cardContainerList.length; i++) {
+			const cardContainer = cardContainerList[i].list
+			if (cardContainer.length == 0) {
+				this.showToast(this.oToasts.emptypiles);
+				return false;
+			}
+		}
 		for (let i = 0; i < cardContainerList.length; i++) {
 			const cardContainer = cardContainerList[i].list
 			const y = cardContainer[cardContainer.length - 1].y;
@@ -425,10 +541,38 @@ class Level extends Phaser.Scene {
 			card.setCard(cardName);
 			card.setName(cardName);
 			card.setSize(180, 260);
-			card.body = "openCard";
 			card.setInteractive({ draggable: true });
 			cardContainerList[i].add(card);
 		}
+		return true;
+	}
+	fireWorks = () => {
+		clearInterval(this.nGameInteraval);
+		const duration = 5 * 1000,
+			animationEnd = Date.now() + duration,
+			defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+		function randomInRange(min, max) {
+			return Math.random() * (max - min) + min;
+		}
+		const interval = setInterval(function () {
+			const timeLeft = animationEnd - Date.now();
+			if (timeLeft <= 0) {
+				return clearInterval(interval);
+			}
+			const particleCount = 50 * (timeLeft / duration);
+			confetti(
+				Object.assign({}, defaults, {
+					particleCount,
+					origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
+				})
+			);
+			confetti(
+				Object.assign({}, defaults, {
+					particleCount,
+					origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
+				})
+			);
+		}, 250);
 	}
 
 	/* END-USER-CODE */

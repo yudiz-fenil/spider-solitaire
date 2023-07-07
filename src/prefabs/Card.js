@@ -18,16 +18,6 @@ class Card extends Phaser.GameObjects.Container {
 
 		/* START-USER-CTR-CODE */
 		// Write your code here.
-		this.oScene = scene;
-		// this.card.setInteractive();
-		// this.scene.input.setDraggable(this.card);
-		// this.card.on('drag', (pointer, dragX, dragY) => {
-		// 	this.card.x = dragX;
-		// 	this.card.y = dragY;
-		// });
-		// this.card.on('dragend', (pointer) => {
-		// 	this.checkContainer(pointer.x);
-		// });
 
 		/* END-USER-CTR-CODE */
 	}

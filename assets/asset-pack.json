@@ -12,6 +12,16 @@
                 "key": "BaseCard"
             },
             {
+                "url": "assets/images/button.png",
+                "type": "image",
+                "key": "button"
+            },
+            {
+                "url": "src/prefabs/Card.js",
+                "type": "script",
+                "key": "Card"
+            },
+            {
                 "url": "assets/images/card_base-2.png",
                 "type": "image",
                 "key": "card_base-2"
