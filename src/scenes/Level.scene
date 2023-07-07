@@ -11,6 +11,15 @@
     "displayList": [
         {
             "type": "Container",
+            "id": "9deb2f3b-ac68-4786-bfb6-cdc26118c8cd",
+            "label": "container_win_cards",
+            "scope": "CLASS",
+            "components": [],
+            "visible": false,
+            "list": []
+        },
+        {
+            "type": "Container",
             "id": "44470c4c-3d9e-45b9-a39c-6d576bbe92fc",
             "label": "container_bg",
             "components": [],

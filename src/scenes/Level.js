@@ -501,8 +501,8 @@ class Level extends Phaser.Scene {
 					this.container_base_cards.list[this.nTotalSequence].setWinCard();
 					const length = container.list.length;
 					for (let i = length - 1; i >= length - 13; i--) {
-						container.list[i].destroy();
-						// this.container_win_cards.add(container.list[i]);
+						container.list[i].setPosition(0, 0);
+						this.container_win_cards.add(container.list[i]);
 					}
 					this.openLastCard(container);
 					if (this.nTotalSequence == 7) this.fireWorks();
