@@ -8,11 +8,11 @@ class BaseCard extends Phaser.GameObjects.Container {
 	constructor(scene, x, y) {
 		super(scene, x ?? 0, y ?? 0);
 
-		// card_base_2
-		const card_base_2 = scene.add.image(0, 0, "card_base-2");
-		card_base_2.scaleX = 0.45;
-		card_base_2.scaleY = 0.45;
-		this.add(card_base_2);
+		// card_base
+		const card_base = scene.add.image(0, 0, "card_base-2");
+		card_base.scaleX = 0.45;
+		card_base.scaleY = 0.45;
+		this.add(card_base);
 
 		// logo_black
 		const logo_black = scene.add.image(0, 0, "logo-black");
@@ -27,13 +27,19 @@ class BaseCard extends Phaser.GameObjects.Container {
 		winCard.visible = false;
 		this.add(winCard);
 
+		this.card_base = card_base;
 		this.winCard = winCard;
 
 		/* START-USER-CTR-CODE */
 		// Write your code here.
+		// this.card_base.setInteractive().on('pointerover', (a, b, c, d) => {
+		// 	console.log(a);
+		// })
 		/* END-USER-CTR-CODE */
 	}
 
+	/** @type {Phaser.GameObjects.Image} */
+	card_base;
 	/** @type {Phaser.GameObjects.Image} */
 	winCard;
 

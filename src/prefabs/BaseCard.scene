@@ -18,7 +18,8 @@
                 {
                     "type": "Image",
                     "id": "2aa39cb9-c3f3-4b1e-a118-a91418e58a08",
-                    "label": "card_base_2",
+                    "label": "card_base",
+                    "scope": "CLASS",
                     "components": [],
                     "texture": {
                         "key": "card_base-2"

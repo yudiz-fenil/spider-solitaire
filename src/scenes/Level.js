@@ -303,7 +303,6 @@ class Level extends Phaser.Scene {
 				card.setCard("back_red_0");
 				card.setName("back_red_0");
 				cardContainer[i].add(card);
-				this.aArray.push(card)
 			}
 		}
 		for (let i = 0; i < cardContainer.length; i++) {
@@ -317,7 +316,6 @@ class Level extends Phaser.Scene {
 				card.setSize(180, 260);
 				card.setInteractive({ draggable: true });
 				cardContainer[i].add(card);
-				this.aArray.push(card)
 			}
 		}
 	}
@@ -345,10 +343,10 @@ class Level extends Phaser.Scene {
 		}
 	}
 	create() {
+		document.title = "Spider Solitaire";
 		this.oGameManager = new GameManager(this);
-		this.aTotalCards = this.oGameManager.aTotalCards;
+		this.aTotalCards = this.oGameManager.aSpiderSolitaireCards;
 		this.editorCreate();
-		this.aArray = []
 		this.nGameTime = 0;
 		this.nGameInteraval = setInterval(() => {
 			this.nGameTime++;
@@ -366,7 +364,6 @@ class Level extends Phaser.Scene {
 		this.lastContainer = null;
 		this.isCardDragging = false;
 		this.isCardDraggable = false;
-		this.dragGroup = this.add.group();
 
 		this.input.on('dragstart', (pointer, gameObject, dragX, dragY) => {
 			this.lastContainer = gameObject.parentContainer
