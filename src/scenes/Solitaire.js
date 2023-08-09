@@ -349,7 +349,7 @@ class Solitaire extends Phaser.Scene {
 		this.aDeltedCards = [];
 		this.addDefaultCards();
 		this.addDeltCards();
-		this.nTotalSequence = -1;
+		this.nTotalSequence = 0;
 		this.lastContainer = null;
 		this.isCardDragging = false;
 		this.isCardDraggable = false;
