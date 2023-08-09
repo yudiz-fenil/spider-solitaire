@@ -11,6 +11,100 @@
     "displayList": [
         {
             "type": "Container",
+            "id": "032c3d52-ecd0-42d6-888d-a84e4f1e3585",
+            "label": "container_bg",
+            "components": [],
+            "list": [
+                {
+                    "type": "Text",
+                    "id": "5561da01-f492-4d3f-8a24-7064aad1fb22",
+                    "label": "text",
+                    "components": [],
+                    "x": 508,
+                    "y": 103,
+                    "originX": 0.5,
+                    "text": "Solitaire",
+                    "fontFamily": "Verdana",
+                    "fontSize": "20px",
+                    "fontStyle": "bold",
+                    "stroke": "#000",
+                    "strokeThickness": 5,
+                    "shadow.stroke": true,
+                    "shadow.fill": true
+                },
+                {
+                    "type": "Text",
+                    "id": "6cce7f2d-e43d-465a-92f6-e7352b7930e3",
+                    "label": "text_2",
+                    "components": [],
+                    "x": 508,
+                    "y": 143,
+                    "originX": 0.5,
+                    "text": "Turn 1",
+                    "fontFamily": "Verdana",
+                    "fontSize": "20px",
+                    "fontStyle": "bold",
+                    "stroke": "#000",
+                    "strokeThickness": 2
+                },
+                {
+                    "type": "Image",
+                    "id": "d1bff680-21dc-4780-9f31-d7ac3f02bf8e",
+                    "label": "btn_play_again",
+                    "scope": "CLASS",
+                    "components": [],
+                    "texture": {
+                        "key": "button"
+                    },
+                    "x": 508,
+                    "y": 235,
+                    "scaleX": 0.5,
+                    "scaleY": 0.5
+                },
+                {
+                    "type": "Text",
+                    "id": "6b44ef48-e48e-4435-b37f-093c92a3cdae",
+                    "label": "text_3",
+                    "components": [],
+                    "x": 508,
+                    "y": 228,
+                    "originX": 0.5,
+                    "text": "Play Again",
+                    "fontFamily": "Verdana"
+                },
+                {
+                    "type": "Image",
+                    "id": "ecf1d5f0-1693-4f7a-94d2-ec7b8bf72a28",
+                    "label": "logo",
+                    "components": [],
+                    "texture": {
+                        "key": "logo"
+                    },
+                    "x": 508,
+                    "y": 57,
+                    "scaleX": 0.5,
+                    "scaleY": 0.5
+                },
+                {
+                    "type": "Text",
+                    "id": "d76cfef9-87c9-4091-b931-4aefa4cf2a96",
+                    "label": "txt_time",
+                    "scope": "CLASS",
+                    "components": [],
+                    "x": 508,
+                    "y": 178,
+                    "originX": 0.5,
+                    "text": "00:00",
+                    "fontFamily": "Verdana",
+                    "fontSize": "20px",
+                    "fontStyle": "bold",
+                    "stroke": "#000",
+                    "strokeThickness": 2
+                }
+            ]
+        },
+        {
+            "type": "Container",
             "id": "76bcdc94-39ed-4259-8c3a-69733b66764c",
             "label": "container_body",
             "components": [],
@@ -384,6 +478,43 @@
             "scope": "CLASS",
             "components": [],
             "list": []
+        },
+        {
+            "type": "Container",
+            "id": "635abd1c-9505-418a-97c5-bcc3a79fcdca",
+            "label": "container_toast",
+            "scope": "CLASS",
+            "components": [],
+            "x": 10,
+            "y": 1000,
+            "visible": false,
+            "list": [
+                {
+                    "type": "Rectangle",
+                    "id": "91a3557e-3acc-40b8-9a62-b0e6fe7153aa",
+                    "label": "bg_toast",
+                    "scope": "CLASS",
+                    "components": [],
+                    "originX": 0,
+                    "originY": 0,
+                    "isFilled": true,
+                    "fillColor": "#577345",
+                    "width": 500,
+                    "height": 50
+                },
+                {
+                    "type": "Text",
+                    "id": "227e25e3-1b63-4438-aa88-5c6db2a433d8",
+                    "label": "txt_toast",
+                    "scope": "CLASS",
+                    "components": [],
+                    "x": 10,
+                    "y": 25,
+                    "originY": 0.5,
+                    "text": "New text",
+                    "fontFamily": "Verdana"
+                }
+            ]
         }
     ],
     "plainObjects": [],

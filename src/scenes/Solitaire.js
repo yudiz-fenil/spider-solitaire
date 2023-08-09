@@ -16,6 +16,49 @@ class Solitaire extends Phaser.Scene {
 	/** @returns {void} */
 	editorCreate() {
 
+		// container_bg
+		const container_bg = this.add.container(0, 0);
+
+		// text
+		const text = this.add.text(508, 103, "", {});
+		text.setOrigin(0.5, 0);
+		text.text = "Solitaire";
+		text.setStyle({ "fontFamily": "Verdana", "fontSize": "20px", "fontStyle": "bold", "stroke": "#000", "strokeThickness": 5, "shadow.stroke": true, "shadow.fill": true });
+		container_bg.add(text);
+
+		// text_2
+		const text_2 = this.add.text(508, 143, "", {});
+		text_2.setOrigin(0.5, 0);
+		text_2.text = "Turn 1";
+		text_2.setStyle({ "fontFamily": "Verdana", "fontSize": "20px", "fontStyle": "bold", "stroke": "#000", "strokeThickness": 2 });
+		container_bg.add(text_2);
+
+		// btn_play_again
+		const btn_play_again = this.add.image(508, 235, "button");
+		btn_play_again.scaleX = 0.5;
+		btn_play_again.scaleY = 0.5;
+		container_bg.add(btn_play_again);
+
+		// text_3
+		const text_3 = this.add.text(508, 228, "", {});
+		text_3.setOrigin(0.5, 0);
+		text_3.text = "Play Again";
+		text_3.setStyle({ "fontFamily": "Verdana" });
+		container_bg.add(text_3);
+
+		// logo
+		const logo = this.add.image(508, 57, "logo");
+		logo.scaleX = 0.5;
+		logo.scaleY = 0.5;
+		container_bg.add(logo);
+
+		// txt_time
+		const txt_time = this.add.text(508, 178, "", {});
+		txt_time.setOrigin(0.5, 0);
+		txt_time.text = "00:00";
+		txt_time.setStyle({ "fontFamily": "Verdana", "fontSize": "20px", "fontStyle": "bold", "stroke": "#000", "strokeThickness": 2 });
+		container_bg.add(txt_time);
+
 		// container_body
 		const container_body = this.add.container(0, 0);
 
@@ -197,6 +240,26 @@ class Solitaire extends Phaser.Scene {
 		// container_top
 		const container_top = this.add.container(0, 0);
 
+		// container_toast
+		const container_toast = this.add.container(10, 1000);
+		container_toast.visible = false;
+
+		// bg_toast
+		const bg_toast = this.add.rectangle(0, 0, 500, 50);
+		bg_toast.setOrigin(0, 0);
+		bg_toast.isFilled = true;
+		bg_toast.fillColor = 5731141;
+		container_toast.add(bg_toast);
+
+		// txt_toast
+		const txt_toast = this.add.text(10, 25, "", {});
+		txt_toast.setOrigin(0, 0.5);
+		txt_toast.text = "New text";
+		txt_toast.setStyle({ "fontFamily": "Verdana" });
+		container_toast.add(txt_toast);
+
+		this.btn_play_again = btn_play_again;
+		this.txt_time = txt_time;
 		this.btn_redeal = btn_redeal;
 		this.delt_card = delt_card;
 		this.container_delt_cards_24 = container_delt_cards_24;
@@ -204,10 +267,17 @@ class Solitaire extends Phaser.Scene {
 		this.container_pure_sequence = container_pure_sequence;
 		this.container_piles_main = container_piles_main;
 		this.container_top = container_top;
+		this.container_toast = container_toast;
+		this.bg_toast = bg_toast;
+		this.txt_toast = txt_toast;
 
 		this.events.emit("scene-awake");
 	}
 
+	/** @type {Phaser.GameObjects.Image} */
+	btn_play_again;
+	/** @type {Phaser.GameObjects.Text} */
+	txt_time;
 	/** @type {Phaser.GameObjects.Image} */
 	btn_redeal;
 	/** @type {Phaser.GameObjects.Image} */
@@ -222,10 +292,24 @@ class Solitaire extends Phaser.Scene {
 	container_piles_main;
 	/** @type {Phaser.GameObjects.Container} */
 	container_top;
+	/** @type {Phaser.GameObjects.Container} */
+	container_toast;
+	/** @type {Phaser.GameObjects.Rectangle} */
+	bg_toast;
+	/** @type {Phaser.GameObjects.Text} */
+	txt_toast;
 
 	/* START-USER-CODE */
 
 	// Write your code here
+	showToast = (msg) => {
+		this.txt_toast.setText(msg);
+		this.bg_toast.width = this.txt_toast.width + 20;
+		this.container_toast.setVisible(true);
+		setTimeout(() => {
+			this.container_toast.setVisible(false);
+		}, 2000);
+	}
 	addDefaultCards = () => {
 		const cardContainer = this.container_piles_main.list
 		for (let i = 0; i <= 6; i++) {
@@ -269,13 +353,18 @@ class Solitaire extends Phaser.Scene {
 		this.lastContainer = null;
 		this.isCardDragging = false;
 		this.isCardDraggable = false;
-		// this.nGameTime = 0;
-		// this.nGameInteraval = setInterval(() => {
-		// 	this.nGameTime++;
-		// 	const minutes = Math.floor(this.nGameTime / 60);
-		// 	const seconds = this.nGameTime % 60;
-		// 	this.txt_time.setText(`${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`);
-		// }, 1000);
+		this.nGameTime = 0;
+		this.nGameInteraval = setInterval(() => {
+			this.nGameTime++;
+			const minutes = Math.floor(this.nGameTime / 60);
+			const seconds = this.nGameTime % 60;
+			this.txt_time.setText(`${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`);
+		}, 1000);
+		this.oToasts = {
+			drop: "Cannot drop: Your card need to be one rank down with different color.",
+			samesuit: "Cannot drop: Your card need to be one rank up with same suit.",
+			highcard: "Cannot drop: Your card need to be high card.",
+		}
 
 		this.input.on('dragstart', (pointer, gameObject, dragX, dragY) => {
 			this.lastContainer = gameObject.parentContainer
@@ -316,6 +405,10 @@ class Solitaire extends Phaser.Scene {
 		});
 		this.delt_card.setInteractive().on('pointerdown', () => this.deltCard());
 		this.btn_redeal.setInteractive().on('pointerdown', () => this.reDealCards());
+		this.btn_play_again.setInteractive().on('pointerdown', () => {
+			clearInterval(this.nGameInteraval);
+			this.scene.restart();
+		});
 	}
 	moveCard(gameObject, x, y) {
 		this.isCardDragging = true;
@@ -383,7 +476,7 @@ class Solitaire extends Phaser.Scene {
 			if (dragCardNumber === lastCard - 1 && dragCardSuit != lastCardSuit) {
 				if ((dragCardSuit == "spade" && lastCardSuit == "club") || (dragCardSuit == "club" && lastCardSuit == "spade") || (dragCardSuit == "heart" && lastCardSuit == "diamond") || (dragCardSuit == "diamond" && lastCardSuit == "heart")) {
 					this.backToPile();
-					// this.showToast(this.oToasts.drop);
+					this.showToast(this.oToasts.drop);
 				} else {
 					if (this.container_top.list.length == 1) this.checkDeltCard(this.container_top.list[0].name);
 					this.container_top.each(card => container.add(card));
@@ -392,7 +485,7 @@ class Solitaire extends Phaser.Scene {
 				}
 			} else {
 				this.backToPile();
-				// this.showToast(this.oToasts.drop);
+				this.showToast(this.oToasts.drop);
 			}
 		} else {
 			const dragCardNumber = parseInt(this.container_top.list[0].name.match(/\d+/)[0]);
@@ -403,6 +496,7 @@ class Solitaire extends Phaser.Scene {
 				this.openLastCard(this.lastContainer);
 			} else {
 				this.backToPile();
+				this.showToast(this.oToasts.highcard);
 			}
 		}
 	}
@@ -418,6 +512,7 @@ class Solitaire extends Phaser.Scene {
 					this.openLastCard(this.lastContainer);
 				} else {
 					this.backToPile();
+					this.showToast(this.oToasts.highcard);
 				}
 			} else {
 				const lastCard = container.list[container.list.length - 1];
@@ -430,10 +525,12 @@ class Solitaire extends Phaser.Scene {
 					this.openLastCard(this.lastContainer);
 				} else {
 					this.backToPile();
+					this.showToast(this.oToasts.samesuit);
 				}
 			}
 		} else {
 			this.backToPile();
+			this.showToast(this.oToasts.samesuit);
 		}
 	}
 	arrangeCards = (container, index) => {
@@ -441,6 +538,10 @@ class Solitaire extends Phaser.Scene {
 			this.container_delt_cards_24.each(card => card.setPosition(310, 153));
 		} else if (container.name.includes("container_pure_piles")) {
 			container.each(card => card.setPosition(710 + (200 * index), 153));
+			if (container.list.length == 13) {
+				this.nTotalSequence++;
+				if (this.nTotalSequence == 4) this.fireWorks();
+			}
 		}
 		else {
 			let gap = 45;
@@ -451,29 +552,6 @@ class Solitaire extends Phaser.Scene {
 				card.y = 414 + (gap * i);
 			});
 		}
-		// if (container.length >= 13) {
-		// 	const aCards = container.list
-		// 	const aSequence = []
-		// 	for (let i = aCards.length - 1; i > aCards.length - 14; i--) {
-		// 		const card = aCards[i];
-		// 		if (card.name.includes("spade")) {
-		// 			aSequence.push(parseInt(card.name.match(/\d+/)[0]));
-		// 		}
-		// 	}
-		// 	if (aSequence.length == 13) {
-		// 		if (this.isWinSequence(aSequence)) {
-		// 			this.nTotalSequence++;
-		// 			this.container_base_cards.list[this.nTotalSequence].setWinCard();
-		// 			const length = container.list.length;
-		// 			for (let i = length - 1; i >= length - 13; i--) {
-		// 				container.list[i].setPosition(0, 0);
-		// 				this.container_win_cards.add(container.list[i]);
-		// 			}
-		// 			this.openLastCard(container);
-		// 			if (this.nTotalSequence == 7) this.fireWorks();
-		// 		}
-		// 	}
-		// }
 	}
 	openLastCard = (container) => {
 		if (container.length) {
@@ -510,6 +588,34 @@ class Solitaire extends Phaser.Scene {
 			}
 			this.container_delt_cards_24.removeAll(true);
 		}
+	}
+	fireWorks = () => {
+		clearInterval(this.nGameInteraval);
+		const duration = 5 * 1000,
+			animationEnd = Date.now() + duration,
+			defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+		function randomInRange(min, max) {
+			return Math.random() * (max - min) + min;
+		}
+		const interval = setInterval(function () {
+			const timeLeft = animationEnd - Date.now();
+			if (timeLeft <= 0) {
+				return clearInterval(interval);
+			}
+			const particleCount = 50 * (timeLeft / duration);
+			confetti(
+				Object.assign({}, defaults, {
+					particleCount,
+					origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
+				})
+			);
+			confetti(
+				Object.assign({}, defaults, {
+					particleCount,
+					origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
+				})
+			);
+		}, 250);
 	}
 
 	/* END-USER-CODE */

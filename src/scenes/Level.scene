@@ -509,7 +509,7 @@
                     "originX": 0,
                     "originY": 0,
                     "isFilled": true,
-                    "fillAlpha": 0.2,
+                    "fillColor": "#577345",
                     "width": 500,
                     "height": 50
                 },

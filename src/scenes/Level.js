@@ -237,7 +237,7 @@ class Level extends Phaser.Scene {
 		const bg_toast = this.add.rectangle(0, 0, 500, 50);
 		bg_toast.setOrigin(0, 0);
 		bg_toast.isFilled = true;
-		bg_toast.fillAlpha = 0.2;
+		bg_toast.fillColor = 5731141;
 		container_toast.add(bg_toast);
 
 		// txt_toast
