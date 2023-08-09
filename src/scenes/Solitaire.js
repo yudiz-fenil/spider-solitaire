@@ -262,6 +262,7 @@ class Solitaire extends Phaser.Scene {
 		this.editorCreate();
 		this.aTotalCards = this.oGameManager.aSolitaireCards;
 		this.aDeltCards = [];
+		this.aDeltedCards = [];
 		this.addDefaultCards();
 		this.addDeltCards();
 		this.nTotalSequence = -1;
@@ -314,6 +315,7 @@ class Solitaire extends Phaser.Scene {
 			}
 		});
 		this.delt_card.setInteractive().on('pointerdown', () => this.deltCard());
+		this.btn_redeal.setInteractive().on('pointerdown', () => this.reDealCards());
 	}
 	moveCard(gameObject, x, y) {
 		this.isCardDragging = true;
@@ -322,7 +324,6 @@ class Solitaire extends Phaser.Scene {
 	}
 	checkContainer = (x, y) => {
 		if (y > 280) {
-			console.log(y)
 			switch (true) {
 				case (x >= 0 && x < 200):
 					this.checkLastCard(this.container_piles_main.list[0], 0);
@@ -369,6 +370,10 @@ class Solitaire extends Phaser.Scene {
 			}
 		}
 	}
+	backToPile = () => {
+		this.container_top.each(card => this.lastContainer.add(card))
+		this.arrangeCards(this.lastContainer, parseInt(this.lastContainer.name.match(/\d+/)[0]));
+	}
 	checkLastCard = (container, index) => {
 		if (container.length) {
 			const lastCard = parseInt(container.list[container.list.length - 1].name.match(/\d+/)[0]);
@@ -377,52 +382,65 @@ class Solitaire extends Phaser.Scene {
 			const lastCardSuit = container.list[container.list.length - 1].name.split("_")[0];
 			if (dragCardNumber === lastCard - 1 && dragCardSuit != lastCardSuit) {
 				if ((dragCardSuit == "spade" && lastCardSuit == "club") || (dragCardSuit == "club" && lastCardSuit == "spade") || (dragCardSuit == "heart" && lastCardSuit == "diamond") || (dragCardSuit == "diamond" && lastCardSuit == "heart")) {
-					this.container_top.each(card => this.lastContainer.add(card))
+					this.backToPile();
 					// this.showToast(this.oToasts.drop);
-					this.arrangeCards(this.lastContainer, parseInt(this.lastContainer.name.match(/\d+/)[0]));
 				} else {
+					if (this.container_top.list.length == 1) this.checkDeltCard(this.container_top.list[0].name);
 					this.container_top.each(card => container.add(card));
 					this.arrangeCards(container, index);
 					this.openLastCard(this.lastContainer);
 				}
 			} else {
-				this.container_top.each(card => this.lastContainer.add(card))
+				this.backToPile();
 				// this.showToast(this.oToasts.drop);
-				this.arrangeCards(this.lastContainer, parseInt(this.lastContainer.name.match(/\d+/)[0]));
 			}
 		} else {
 			const dragCardNumber = parseInt(this.container_top.list[0].name.match(/\d+/)[0]);
 			if (dragCardNumber == 13) {
+				if (this.container_top.list.length == 1) this.checkDeltCard(this.container_top.list[0].name);
 				this.container_top.each(card => container.add(card))
 				this.arrangeCards(container, index);
 				this.openLastCard(this.lastContainer);
 			} else {
-				this.container_top.each(card => this.lastContainer.add(card))
-				this.arrangeCards(this.lastContainer, parseInt(this.lastContainer.name.match(/\d+/)[0]));
+				this.backToPile();
 			}
 		}
 	}
 	checkPureCards = (container, index) => {
-		console.log(index, container.name, container.list.length)
-		if (container.list.length == 0) {
-			const dragCardNumber = parseInt(this.container_top.list[0].name.match(/\d+/)[0]);
-			console.log(dragCardNumber, dragCardNumber)
-			if (dragCardNumber == 1 && this.container_top.list.length == 1) {
-				this.container_top.each(card => container.add(card))
-				// this.arrangeCards(container, index);
-				this.openLastCard(this.lastContainer);
+		const dragCardNumber = parseInt(this.container_top.list[0].name.match(/\d+/)[0]);
+		const dragCardSuit = this.container_top.list[0].name.split("_")[0];
+		if (this.container_top.list.length == 1) {
+			if (container.list.length == 0) {
+				if (dragCardNumber == 1 && this.container_top.list.length == 1) {
+					if (this.container_top.list.length == 1) this.checkDeltCard(this.container_top.list[0].name);
+					this.container_top.each(card => container.add(card))
+					this.arrangeCards(container, index);
+					this.openLastCard(this.lastContainer);
+				} else {
+					this.backToPile();
+				}
 			} else {
-				this.container_top.each(card => this.lastContainer.add(card))
-				this.arrangeCards(this.lastContainer, parseInt(this.lastContainer.name.match(/\d+/)[0]));
+				const lastCard = container.list[container.list.length - 1];
+				const lastCardSuit = lastCard.name.split("_")[0];
+				const lastCardNumber = parseInt(lastCard.name.split("_")[1]);
+				if (dragCardSuit == lastCardSuit && (dragCardNumber - 1) == lastCardNumber) {
+					if (this.container_top.list.length == 1) this.checkDeltCard(this.container_top.list[0].name);
+					this.container_top.each(card => container.add(card))
+					this.arrangeCards(container, index);
+					this.openLastCard(this.lastContainer);
+				} else {
+					this.backToPile();
+				}
 			}
 		} else {
+			this.backToPile();
 		}
 	}
 	arrangeCards = (container, index) => {
 		if (index == 24) {
 			this.container_delt_cards_24.each(card => card.setPosition(310, 153));
 		} else if (container.name.includes("container_pure_piles")) {
-			this.container.each(card => card.setPosition(110 + (200 * (i + 3)), 153));
+			container.each(card => card.setPosition(710 + (200 * index), 153));
 		}
 		else {
 			let gap = 45;
@@ -471,7 +489,8 @@ class Solitaire extends Phaser.Scene {
 		}
 	}
 	deltCard = () => {
-		const cardName = this.oGameManager.getRandomCard(this.aDeltCards);
+		const cardName = this.oGameManager.getFirstCard(this.aDeltCards);
+		this.aDeltedCards.push(cardName);
 		const card = new Card(this, 310, 153);
 		card.setCard(cardName);
 		card.setName(cardName);
@@ -480,8 +499,17 @@ class Solitaire extends Phaser.Scene {
 		this.container_delt_cards_24.add(card);
 		if (this.aDeltCards.length == 0) this.delt_card.setVisible(false);
 	}
-	removeDeltedCard = (cardName) => {
-		const index = this.aDeltCards.findIndex(cardName);
+	checkDeltCard = (cardName) => {
+		if (this.aDeltedCards.includes(cardName)) this.aDeltedCards.pop();
+	}
+	reDealCards = () => {
+		if (this.aDeltedCards.length) {
+			this.delt_card.setVisible(true);
+			while (this.aDeltedCards.length) {
+				this.aDeltCards.push(this.aDeltedCards.shift());
+			}
+			this.container_delt_cards_24.removeAll(true);
+		}
 	}
 
 	/* END-USER-CODE */

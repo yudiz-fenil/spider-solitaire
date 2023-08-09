@@ -22,4 +22,5 @@ class GameManager {
 		const arr = array.splice(index, 1)
 		return arr[0];
 	}
+	getFirstCard = (array) => array.shift();
 }
